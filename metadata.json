@@ -1,0 +1,7 @@
+{
+  "name": "LingoSpeak Challenge",
+  "description": "A language learning feature to practice forming sentences with real-time AI feedback.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
