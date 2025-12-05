@@ -1,10 +1,22 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { GeminiResponseSchema } from "../types";
 
-// Safely retrieve API Key preventing "process is not defined" error in browser
+// Safely retrieve API Key for Vite (import.meta.env) or Node (process.env)
 const getApiKey = () => {
   try {
-    return (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : '';
+    // Check for Vite environment variable first
+    // @ts-ignore
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      // @ts-ignore
+      return import.meta.env.VITE_API_KEY || '';
+    }
+    
+    // Fallback to process.env (for Node/other setups)
+    if (typeof process !== 'undefined' && process.env) {
+      return process.env.API_KEY;
+    }
+    
+    return '';
   } catch (e) {
     return '';
   }
